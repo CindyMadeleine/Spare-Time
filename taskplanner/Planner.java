@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 public class Planner{
 	Task[] tasklist;
-	//private ArrayList<Task> queue;
 	private int time;
 	private int manpower;
 
@@ -121,7 +120,7 @@ public class Planner{
 	*	@return path : the path size is huger than the tasklist we return the path
 	*	@return null : null
 	**/
-	private ArrayList<Integer> setearliesttime(){ //returns a cycle if found
+	private ArrayList<Integer> setearliesttime(){ //Topsort
 		ArrayList<Task> que = new ArrayList<Task>();
 		ArrayList<Integer> path = new ArrayList<Integer>();
 
@@ -153,7 +152,7 @@ public class Planner{
 			}
 		}
 
-		if(path.size() != tasklist.length){ //I don't know if this is a good way to find a cycle?
+		if(path.size() != tasklist.length){ //cycle is found
 			return path;
 		}
 

@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class OrganizeMyTasks{
+public class OrganizeMyTasks implements taskorganizer{
 	static Planner planner;
 
 	public OrganizeMyTasks(String name){
@@ -11,7 +11,7 @@ public class OrganizeMyTasks{
 			return;
 		}	
 
-		readFile(name);
+		createPlanner(name);
 		plantasks();
 	}
 
@@ -21,11 +21,15 @@ public class OrganizeMyTasks{
 	**/
 	public void runTestProjects(){
 		System.out.println("Buildhouse\t\t");
-		readFile("buildhouse.txt");
+		createPlanner("buildhouse.txt");
 		plantasks();
 
 		System.out.println("Buildhouse2");
-		readFile("buildhouse2.txt");
+		createPlanner("buildhouse2.txt");
+		plantasks();
+
+		System.out.println("Buildrail");
+		createPlanner("buildrail.txt");
 		plantasks();
 	}
 
@@ -60,7 +64,7 @@ public class OrganizeMyTasks{
 	*	@error	fileNotFoundException:	File named <filename> is not found.
 	*	@note filename must contain the amount of tasks at the first line.
 	**/
-	private void readFile(String filename){
+	public void createPlanner(String filename){
 		Scanner sc = null;
 		try{
 			sc = new Scanner(new File(filename));

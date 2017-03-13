@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
-public class Planner{
+public class Planner implements taskplanner{
 	Task[] tasklist;
 	private int time;
 	private int manpower;
@@ -23,13 +23,11 @@ public class Planner{
 	*	for all the task that are dependent on the task (Optional!)
 	**/
 	public void createTask(String[] info){
-		Task t = new Task(tasklist.length);
-
 		if(info.length < 4){
 			System.out.println("Task does not have enough information");
 			return;
 		}
-
+		Task t = new Task(tasklist.length);
 		try{
 			t.id = Integer.parseInt(info[0]);
 		} catch(NumberFormatException nfe){
@@ -120,7 +118,7 @@ public class Planner{
 	*	@return path : the path size is huger than the tasklist we return the path
 	*	@return null : null
 	**/
-	private ArrayList<Integer> setearliesttime(){ //Topsort
+	public ArrayList<Integer> setearliesttime(){ //Topsort
 		ArrayList<Task> que = new ArrayList<Task>();
 		ArrayList<Integer> path = new ArrayList<Integer>();
 
@@ -221,9 +219,9 @@ public class Planner{
 
 	/**
 	*	Calculate when the task starts, how much manpower is needed at the current time
-	*	and which start should start and end.
+	*	and which task should start and end.
 	*
-	*	First it sorts all the task in tasklist by earliest start and earlist end. 
+	*	First it sorts all the task in tasklist by earliest start and estimated time. 
 	*	Then it set times equal to the first task in the list. First we check that
 	* 	there is still one task that has not started. If there is a task that has not
 	*	started yet, we check if this task start at an earlier point than the ending time

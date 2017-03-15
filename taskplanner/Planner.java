@@ -52,7 +52,6 @@ public class Planner implements taskplanner{
 		}
 
 
-		int innum = 0;
 		for(int i = 4; i < info.length && !"0".equals(info[i]); i++){
 			int tasknum;
 			try{
@@ -73,7 +72,7 @@ public class Planner implements taskplanner{
 	*	to that predecessor. 
 	**/
 	public void setOutEdges(){ 
-		for(int i = 0; i < tasklist.length; i++){ //O(|N|)
+		for(int i = 0; i < tasklist.length; i++){ //O(|N|*|N|)
 			Task out = tasklist[i];
 			if(out == null)
 				continue;
@@ -240,7 +239,7 @@ public class Planner implements taskplanner{
 		System.out.println("Time: " + time);
 		int i = 0, j = 0;
 		for(; j < tasklist.length; ){ //O(|T|)
-			if(i < tasklist.length && tasklist[i].earlieststart < tasklist[j].earlieststart + tasklist[j].estimatedTime){ //cjeck if some task ends
+			if(i < tasklist.length && tasklist[i].earlieststart < tasklist[j].earlieststart + tasklist[j].estimatedTime){
 				int pivot = tasklist[i].earlieststart;
 				if(pivot != time){
 					System.out.println("Manpower: " + manpower);
